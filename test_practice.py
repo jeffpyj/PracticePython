@@ -1,4 +1,5 @@
 import pytest
+import random
 from practice import *
 
 def test_is_multiple():
@@ -18,6 +19,8 @@ def test_minmax():
     assert minmax(list_with_None) == (1, 6)
     list_with_String = [-22,"jeff",None,-22]
     assert minmax(list_with_String) == (-22, -22)
+    with pytest.raises(TypeError):
+        minmax(False)
 
 def test_sqr_sum():
     assert sqr_sum(4) == 14
@@ -32,3 +35,26 @@ def test_sqr_odd_sum():
     assert sqr_odd_sum(-1) == 0
     assert sqr_odd_sum("hello") == 0
     assert sqr_odd_sum(None) == 0
+
+def test_ran_choice():
+    int_list = [k for k in range(1,6)]
+    func_res = ran_choice(int_list)
+    random.seed(103)
+    test_res = int_list[random.randrange(0,5)]
+    assert func_res == test_res
+
+def test_distince_pair_odd_product():
+    assert distinc_pair_odd_product([1,3,4]) == True
+    assert distinc_pair_odd_product([1,2,4]) == False
+    assert distinc_pair_odd_product([3,3,4]) == False
+    assert distinc_pair_odd_product([3,3,5]) == True
+
+def test_all_distinct():
+    assert all_distinct([1,3,5,6,7]) == True
+    assert all_distinct([1,1,2]) == False
+    assert all_distinct([1]) == True
+    assert all_distinct([]) == True
+    assert all_distinct([1,None,3]) == "error caught"
+    with pytest.raises(TypeError):
+        all_distinct(1)
+
