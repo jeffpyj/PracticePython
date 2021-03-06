@@ -1,5 +1,7 @@
 import collections.abc
 from math import sqrt
+from collections import deque
+import string
 import random
 """
 Write a short Python function, is_multiple(n, m), that takes two integer values and returns True if n is a multiple of m, that is, n = mi for some integer i, and False otherwise.
@@ -115,10 +117,46 @@ def my_shuffle(data):
         swap_i = random.randint(0,upper_bound-1)
         data[i], data[swap_i] = data[swap_i], data[i]
 
+"""Write a Python program that repeatedly reads lines from standard input until an EOFError is raised, and then outputs those lines in reverse order (a user can indicate end of input by typing ctrl-D).
+"""
+def reverse_input():
+    s = deque()
+    try:
+        while True:
+            s.append(input("enter something\n"))
+    except EOFError:
+        try:
+            while True:
+                print(s.pop())
+        except IndexError:
+            print("finished")
+
+"""Write a short Python program that takes two arrays a and b of length n storing int values, and returns the dot product of a and b. That is, it returns an array c of length n such that c[i] = a[i] · b[i], for i = 0,. . ., n – 1.
+"""
+def dot_product(a, b):
+    if len(a) != len(b):
+        return 0
+    return [a[i] * b[i] for i in range(len(a))]
+
+"""Write a short Python function that counts the number of vowels in a given character string.
+"""
+def count_vowels(str):
+    #casefold to ignore case
+    str = str.casefold()
+    vowels = 'aeiou'
+    count = 0
+    for chr in str:
+        if chr in vowels:
+            count += 1
+    return count
+
+"""Write a short Python function that takes a string s, representing a sentence, and returns a copy of the string with all punctuation removed. For example, if given the string “Let's try, Mike.”, this function would return “Lets try Mike”.
+"""
+def remove_punctuations(str):
+    return "".join(c for c in str if c not in string.punctuation)
+
+
 if __name__ == "__main__":
     pow_of_two = [pow(2,k) for k in range(10)] 
     pronic = [n * (n + 1) for n in range (10)]
     a_to_z = [chr(c) for c in range (ord('a'), ord('z') + 1)]
-    my_shuffle(a_to_z)
-    print(a_to_z)
-    

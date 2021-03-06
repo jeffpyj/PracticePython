@@ -58,3 +58,10 @@ def test_all_distinct():
     with pytest.raises(TypeError):
         all_distinct(1)
 
+def test_dot_product():
+    assert dot_product([1,2,3],[3,2,1]) == [3,4,3]
+    assert dot_product([1,2,3], [1]) == 0
+
+def test_count_vowel():
+    assert count_vowels('a5.3long\\n') == 2
+    assert count_vowels('h I  _\t') == 1
